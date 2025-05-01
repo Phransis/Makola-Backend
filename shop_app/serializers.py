@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Cart, Product
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,3 +19,16 @@ class DetailedProductSerializer(serializers.ModelSerializer):
         # Assuming you have a method to get similar products
         products = Product.objects.filter(category=product.category).exclude(id=product.id)[:5]
         return ProductSerializer(products, many=True).data
+    
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['cart_code', 'created_at', 'updated_at', 'paid', 'user', 'product', 'quantity']
+        # read_only_fields = ['cart_code', 'created_at', 'updated_at', 'paid']
+
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    cart = CartSerializer(read_only=True)
+    class Meta:
+        model = Cart
+        fields = ['id','cart', 'product', 'quantity']
