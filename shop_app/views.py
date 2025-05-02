@@ -114,7 +114,7 @@ def mytest_view(request):
     ussd_type = request.data.get('ussd_type')
     activation_code = request.data.get('activation_code')
 
-    logger.info(f"Response: {institution_id}")  # Logs the response
+    logger.info(f"Response: {institution_id}, {institution_action}, {institution_name}, {institution_email}, {korba_pay_id}, {ussd_code}, {ussd_type}, {activation_code}")  # Logs the response
 
 
     # This is a test view to check if the server is running correctly
