@@ -58,6 +58,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_HOSTS = [
     'http://localhost:3000',  # Allow requests from localhost:3000 (React app)
     'http://localhost:5173',  # Allow requests from localhost:5173 (Vite app)
+    'https://makola-backend-8fes.onrender.com',  # Allow requests from Render.com (production)
 ]
 
 ROOT_URLCONF = 'makola.urls'
