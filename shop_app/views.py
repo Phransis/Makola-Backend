@@ -4,6 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import CartItem, Product
 from .serializers import ProductSerializer
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 @api_view(['GET'])
@@ -110,6 +113,8 @@ def mytest_view(request):
     ussd_code = request.data.get('ussd_code')
     ussd_type = request.data.get('ussd_type')
     activation_code = request.data.get('activation_code')
+
+    logger.info(f"Response: {institution_id}")  # Logs the response
 
 
     # This is a test view to check if the server is running correctly

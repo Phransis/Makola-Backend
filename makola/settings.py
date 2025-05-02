@@ -136,3 +136,28 @@ MEDIA_ROOT = BASE_DIR / 'media'  # Directory to store uploaded media files
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.CustomUser'  # Specify your custom user model here
 CORS_ALLOW_ALL_ORIGINS = True
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # keeps Django default logging
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {  # catches all loggers
+        'handlers': ['console'],
+        'level': 'INFO',  # or DEBUG for more detail
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'your_app_name': {  # custom logger for your app
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
