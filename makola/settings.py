@@ -134,3 +134,4 @@ MEDIA_ROOT = BASE_DIR / 'media'  # Directory to store uploaded media files
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'core.CustomUser'  # Specify your custom user model here
+CORS_ALLOW_ALL_ORIGINS = True
