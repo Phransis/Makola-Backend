@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -73,3 +74,52 @@ def add_item(request):
             return Response({"message": "Product quantity updated"}, status=200)
     except Product.DoesNotExist:
         return Response({"error": "Product not found"}, status=404)
+@api_view(['GET'])
+def product_in_cart(request):
+    cart_code = request.query_params.get('cart_code')
+    product_id = request.query_params.get('product_id')
+    try:
+        cart_item = CartItem.objects.get(cart_code=cart_code)
+        product = Product.objects.get(id=product_id)
+
+        product_exists_in_cart = cart_item.product.filter(id=product.id).exists()
+        if product_exists_in_cart:
+            return Response({"message": "Product is in the cart"}, status=200)
+        else:
+            return Response({"message": "Product is not in the cart"}, status=404)
+
+    except CartItem.DoesNotExist:
+        return Response({"error": "Product not found in cart"}, status=404)
+
+@api_view(['GET'])
+def product_in_cart(request, cart_code):
+    try:
+        cart_items = CartItem.objects.filter(cart__cart_code=cart_code)
+        serializer = ProductSerializer(cart_items, many=True)
+        return Response(serializer.data)
+    except CartItem.DoesNotExist:
+        return Response({"error": "Cart not found"}, status=404)
+
+@api_view(['POST'])
+def mytest_view(request):
+    institution_id = request.data.get('institution_id')
+    institution_action = request.data.get('institution_action')
+    institution_name = request.data.get('institution_name')
+    institution_email = request.data.get('institution_email')
+    korba_pay_id = request.data.get('korba_pay_id')
+    ussd_code = request.data.get('ussd_code')
+    ussd_type = request.data.get('ussd_type')
+    activation_code = request.data.get('activation_code')
+
+
+    # This is a test view to check if the server is running correctly
+    return JsonResponse({
+        "institution_id": institution_id,
+        "institution_action": institution_action,   
+        "institution_name": institution_name,
+        "institution_email": institution_email,
+        "korba_pay_id": korba_pay_id,
+        "ussd_code": ussd_code,
+        "ussd_type": ussd_type,
+        "activation_code": activation_code,
+        "message": "Success"}, status=200)
