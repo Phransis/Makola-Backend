@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-oo3yz^u@*0jif1vnm3#0lm3_702&j4wvhas$&)kz7sz+g4#!$t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','https://makola-backend-8fes.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1','makola-backend-8fes.onrender.com']
 
 
 # Application definition
