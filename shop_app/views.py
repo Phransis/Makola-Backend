@@ -127,4 +127,5 @@ def mytest_view(request):
         "ussd_code": ussd_code,
         "ussd_type": ussd_type,
         "activation_code": activation_code,
-        "message": "Success"}, status=200)
+        "status": "success",
+        "message": "Request received Successfully"}, status=200)
