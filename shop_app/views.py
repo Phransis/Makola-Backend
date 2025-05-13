@@ -106,20 +106,20 @@ def product_in_cart(request, cart_code):
 
 @api_view(['GET'])
 def get_cart_stat(request):
-    cart_code = request.query_params.get('cart_code')
-    cart = Cart.objects.get(cart_code=cart_code, paid=False)
-    serializer = SimpleCartSerializer(cart)
-    return Response(serializer.data)
-
-
     # cart_code = request.query_params.get('cart_code')
-    # try:
-    #     cart_items = CartItem.objects.filter(cart__cart_code=cart_code, paid=False)
-    #     total_price = sum(item.product.price * item.quantity for item in cart_items)
-    #     total_items = sum(item.quantity for item in cart_items)
-    #     return Response({"total_price": total_price, "total_items": total_items}, status=200)
-    # except CartItem.DoesNotExist:
-    #     return Response({"error": "Cart not found"}, status=404)
+    # cart = Cart.objects.get(cart_code=cart_code, paid=False)
+    # serializer = SimpleCartSerializer(cart)
+    # return Response(serializer.data)
+
+
+    cart_code = request.query_params.get('cart_code')
+    try:
+        cart_items = CartItem.objects.filter(cart__cart_code=cart_code, paid=False)
+        total_price = sum(item.product.price * item.quantity for item in cart_items)
+        total_items = sum(item.quantity for item in cart_items)
+        return Response({"total_price": total_price, "total_items": total_items}, status=200)
+    except CartItem.DoesNotExist:
+        return Response({"error": "Cart not found"}, status=404)
 
 @api_view(['POST'])
 def mytest_view(request):
