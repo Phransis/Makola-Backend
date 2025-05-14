@@ -155,7 +155,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'your_app_name': {  # custom logger for your app
+        'makola': {  # custom logger for your app
             'handlers': ['console'],
             'level': 'DEBUG',
         },
